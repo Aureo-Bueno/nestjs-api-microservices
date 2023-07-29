@@ -16,4 +16,15 @@ model Category{
   name String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Product Product[]
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  name String
+  price Float
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

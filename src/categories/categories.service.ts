@@ -14,18 +14,35 @@ export class CategoriesService {
   }
 
   findAll() {
-    return `This action returns all categories`;
+    return this.prisma.category.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      }
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} category`;
+    return this.prisma.category.findUniqueOrThrow({
+      where: {
+        id,
+      },
+    });
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+    return this.prisma.category.update({
+      where: {
+        id,
+      },
+      data: updateCategoryDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} category`;
+    return this.prisma.category.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
